@@ -390,7 +390,6 @@ UserInputService.InputBegan:Connect(function(input, gp)
         end)
 		if crouching == false then
             makePersonInvis(true)
-            crouching = true
             task.spawn(function()
             addStatusEffect("Undetectable", "I", 5)
             end)
@@ -408,7 +407,7 @@ UserInputService.InputBegan:Connect(function(input, gp)
 		loopTrack = humanoid:LoadAnimation(loopAnim)
 		loopTrack.Looped = true
 		loopTrack:Play()
-
+                            crouching = true
 		-- Walk/Run animation logic (using current crouched speed, here sprintSpeed)
 		walkRunConnection = RunService.RenderStepped:Connect(function()
 			if not active then return end
