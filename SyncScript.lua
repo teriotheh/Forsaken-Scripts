@@ -81,7 +81,7 @@ end)
 local hbdebounce = false
 hitbox.Touched:Connect(function(hit)
 if hbdebounce == true then return end
-if hit.Parent.Name == game.Players.LocalPlayer.Character.Name then
+if hit.Parent.Name == game.Players.LocalPlayer.Character.Name and game.Players.LocalPlayer.Character.Parent == workspace.Players.Killers then
 hbdebounce = true
 if BodyVel then
   BodyVel:Destroy()
@@ -92,6 +92,7 @@ fakehbx.Parent = workspace
 fakehbx.Color = Color3.fromRGB(0, 255, 0)
 game.Debris:AddItem(fakehbx, 1)
 print("Hit killer!")
+game.Players.LocalPlayer.Character.Humanoid:TakeDamage(50)
 end
 end)
 end
