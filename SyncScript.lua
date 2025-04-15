@@ -1,3 +1,4 @@
+local isFrozen = false
 local function freezePlayer()
     isFrozen = true
     -- Bind an action that sinks all inputs, effectively freezing the player
