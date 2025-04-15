@@ -1,3 +1,18 @@
+local function freezePlayer()
+    isFrozen = true
+    -- Bind an action that sinks all inputs, effectively freezing the player
+    ContextActionService:BindAction(
+        "FreezeMovement",
+        function() return Enum.ContextActionResult.Sink end,
+        false,
+        unpack(Enum.PlayerActions:GetEnumItems())
+    )
+end
+local function unfreezePlayer()
+    isFrozen = false
+    -- Unbind the action to allow player movement again
+    ContextActionService:UnbindAction("FreezeMovement")
+end
 local player = game.Players.LocalPlayer
 local syncedPlrs = {}
 for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
@@ -93,6 +108,11 @@ fakehbx.Color = Color3.fromRGB(0, 255, 0)
 game.Debris:AddItem(fakehbx, 1)
 print("Hit killer!")
 game.Players.LocalPlayer.Character.Humanoid:TakeDamage(50)
+    task.spawn(function()
+    freezeplayer()
+    task.wait(2)
+    unfreezeplayer()
+     end)
 end
 end)
 end
