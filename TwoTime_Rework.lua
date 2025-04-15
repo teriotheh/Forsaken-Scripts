@@ -348,10 +348,12 @@ function makePersonInvis(toggle)
         v.Transparency = 0.9
     end
    end
+     if character:FindFirstChild("Life2") then
      for i,v in pairs(character.Life2:GetDescendants()) do
     if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
         v.Transparency = 0.9
     end
+   end
    end
   else
    for i,v in pairs(character.Life1:GetDescendants()) do
@@ -359,10 +361,12 @@ function makePersonInvis(toggle)
         v.Transparency = 0
     end
    end
-      for i,v in pairs(character.Life2:GetDescendants()) do
+       if character:FindFirstChild("Life2") then
+     for i,v in pairs(character.Life2:GetDescendants()) do
     if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
         v.Transparency = 0
     end
+   end
    end
   end
 end
