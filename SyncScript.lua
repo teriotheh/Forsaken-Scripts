@@ -17,20 +17,24 @@ local function unfreezePlayer()
 end
 local player = game.Players.LocalPlayer
 local syncedPlrs = {}
+
+----------------------------
+for i,plr in pairs(game.Players:GetPlayers()) do
+   plr.Chatted:Connect(function(msg)
+        if msg == ":syncScript" then
+           if plr.Name == game.Players.LocalPlayer.Name then
+------YOURESLF
 for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
 if v:IsA("Frame") then
  if v:FindFirstChild("Username").Text == player.Name.." (You)" then
  if player.Character.Name == "TwoTime" then
  v.SurvivorName.Text = "Two Time (Rework)"
- loadstring(game:HttpGet("https://raw.githubusercontent.com/teriotheh/Forsaken-Scripts/refs/heads/main/TwoTime_Rework.lua"))()
      end
  end
 end
 end
-----------------------------
-for i,plr in pairs(game.Players:GetPlayers()) do
-   plr.Chatted:Connect(function(msg)
-        if msg == ":syncScript" then
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/teriotheh/Forsaken-Scripts/refs/heads/main/TwoTime_Rework.lua"))()
+                else
            -----Weapon
         for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
 if v:IsA("Frame") then
@@ -68,6 +72,7 @@ if v:IsA("Frame") then
  end
 end
 end
+                end
         end
     end)
 end
