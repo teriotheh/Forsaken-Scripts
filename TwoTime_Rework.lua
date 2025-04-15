@@ -4,6 +4,29 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local character = player.Character or player.CharacterAdded:Wait()
+local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
+---------------------------------------------------------
+function Format(Int)
+	return string.format("%02i", Int)
+end
+
+function convertToHMS(Seconds)
+	local Minutes = (Seconds - Seconds%60)/60
+	Seconds = Seconds - Minutes*60
+	Minutes = Minutes
+	return Format(Minutes)..":"..Format(Seconds)
+end
+function addStatusEffect(status, power, timer)
+    local Status = StatusTemplate:Clone()
+    Status.Name = status.."-Artificial"
+    Status.Parent = player.PlayerGui.MainUI.StatusContainer
+    Status.Title.Text = status.." "..power
+    for i = 1,timer do
+    Status.Timer.Text = convertToHMS(timer - i)
+    task.wait(1)
+    end
+    Status:Destroy()
+end
 local fzAnim = Instance.new("Animation")
 fzAnim.AnimationId = "rbxassetid://117339039533356"
 --rounding system for cooldowns
@@ -67,6 +90,39 @@ Ability3.Image = "rbxassetid://119937664437884"
 Ability3.Clipping.Top.Image = "rbxassetid://119937664437884"
 local RunningToggle = character.SpeedMultipliers.Sprinting
 local FOVToggle = character.FOVMultipliers.Sprinting
+-----Weapon
+   local knife = Instance.new("Accessory")
+    knife.Name = "ShadowBladeAccessory"
+    
+    local handle = Instance.new("Part")
+    handle.Name = "Handle"
+    handle.Size = Vector3.new(1, 1, 1)
+    handle.CanCollide = false
+    handle.Anchored = false
+    handle.Transparency = 0
+    handle.Color = Color3.new(0.1, 0.1, 0.1)
+    handle.Parent = knife
+
+    local mesh = Instance.new("SpecialMesh")
+    mesh.MeshId = "http://www.roblox.com/asset/?id=62275962" -- Novo mesh da faca
+    mesh.TextureId = "http://www.roblox.com/asset/?id=62276016" -- Nova textura da faca
+    mesh.Parent = handle
+    mesh.Scale = Vector3.new(0.5, 0.5, 0.5)
+
+    local weld = Instance.new("Weld")
+    weld.Part0 = handle
+    weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Right Arm")
+    weld.C0 = CFrame.new(1.75, -0.879999995, 0, -1.31445322e-05, 1, 0, 0, -0, 1, 1, 1.31445331e-05, -7.10549173e-15)
+    weld.C1 = CFrame.new(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    weld.Parent = handle
+
+    knife.Parent = game.Players.LocalPlayer.Character
+local stabSFX = Instance.new("Sound")
+stabSFX.SoundId = "rbxassetid://99820161736138" 
+stabSFX.Volume = 1.45  
+stabSFX.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")  
+stabSFX:Play()
+-------------------------------------------------
 --StaminaDrain toggle
     local function staminadrainono(state)
 
@@ -285,7 +341,31 @@ local function isBehindTarget(target)
 end
 
 -- Ability Activation using the E key
-
+function makePersonInvis(toggle)
+  if toggle == true then
+  for i,v in pairs(character.Life1:GetDescendants()) do
+    if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+        v.Transparency = 0.9
+    end
+   end
+     for i,v in pairs(character.Life2:GetDescendants()) do
+    if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+        v.Transparency = 0.9
+    end
+   end
+  else
+   for i,v in pairs(character.Life1:GetDescendants()) do
+    if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+        v.Transparency = 0
+    end
+   end
+      for i,v in pairs(character.Life2:GetDescendants()) do
+    if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+        v.Transparency = 0
+    end
+   end
+  end
+end
 UserInputService.InputBegan:Connect(function(input, gp)
 	if gp then return end
     if crouchDebounce then return end
@@ -305,8 +385,11 @@ UserInputService.InputBegan:Connect(function(input, gp)
         Ability2.Clipping.Top.Visible = true
         end)
 		if crouching == false then
+            makePersonInvis(true)
             crouching = true
-            
+            task.spawn(function()
+            addStatusEffect("Undetectable", "I", 5)
+            end)
 		-- Set WalkSpeed to sprintSpeed (since "I'm not slow")
 		humanoid.WalkSpeed = sprintSpeed
 
@@ -339,7 +422,10 @@ UserInputService.InputBegan:Connect(function(input, gp)
 			end
 		end)
     else
-    
+    makePersonInvis(false)
+    if player.PlayerGui.MainUI.StatusContainer:FindFirstChild("Undetectable-Artificial") then
+      player.PlayerGui.MainUI.StatusContainer:FindFirstChild("Undetectable-Artificial"):Destroy()
+    end
     crouching = false
     active = false
     stopAbilityAnims()
@@ -370,12 +456,20 @@ UserInputService.InputBegan:Connect(function(input, gp)
         Ability1.CooldownTime.Text = ""
         Ability1.Clipping.Top.Visible = true
         end)
+        makePersonInvis(false)
+    if player.PlayerGui.MainUI.StatusContainer:FindFirstChild("Undetectable-Artificial") then
+      player.PlayerGui.MainUI.StatusContainer:FindFirstChild("Undetectable-Artificial"):Destroy()
+    end
 			stopAbilityAnims()
             local slashTrack = humanoid:LoadAnimation(slashAnim)
 			slashTrack:Play()
             crouching = false
 			active = false
+            stabSFX:Play()
+            freezePlayer()
             task.wait(0.5)
+            unfreezePlayer()
+    
             			stopAbilityAnims()
                         crouching = false
 			active = false
