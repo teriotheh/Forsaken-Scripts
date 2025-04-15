@@ -1,3 +1,4 @@
+local ContextActionService = game:GetService("ContextActionService")
 local isFrozen = false
 local function freezePlayer()
     isFrozen = true
