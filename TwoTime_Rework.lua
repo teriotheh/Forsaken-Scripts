@@ -517,7 +517,7 @@ end)
     end
 end)]]--
 character.Humanoid.HealthChanged:Connect(function()
-if character.Humanoid.MaxHealth == 40 or character.Humanoid.MaxHealth == 110 then
+if character.Humanoid.MaxHealth == 40 then
     if SecondLifeUsed then return end
    SecondLifeUsed = true
    if savedPosition then
