@@ -33,7 +33,11 @@ task.spawn(function()
 addStatusEffect("Speed", "II", time)
 end)
 for i = 1,time * 100 do
+if character.FOVMultipliers.Sprinting.Value == 1.125 then
 	character.SpeedMultipliers.Sprinting.Value = 3
+else
+	character.SpeedMultipliers.Sprinting.Value = 1.55
+end
 		task.wait(0.01)
 end
 if character.FOVMultipliers.Sprinting.Value == 1.125 then
@@ -340,9 +344,9 @@ fakehbx.Parent = workspace
 fakehbx.Color = Color3.fromRGB(0, 255, 0)
 game.Debris:AddItem(fakehbx, 1)
 if crouchin then
-	giveSpeed(10)
+	giveSpeed(6)
 else
-	giveSpeed(4)
+	giveSpeed(3)
 end
 if Stabs < 3 then
 if crouchin then
