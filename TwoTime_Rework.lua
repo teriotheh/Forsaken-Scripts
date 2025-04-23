@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local character = player.Character or player.CharacterAdded:Wait()
 local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
----------------------------------------------------------
+---------------------------------------------------------TWO TIME REWORK
 function Format(Int)
 	return string.format("%02i", Int)
 end
@@ -70,24 +70,24 @@ local Helpless = false
 local Ability1 = AbilityTemplate:Clone()
 Ability1.Parent = AbilityContainer
 Ability1.Name = "RitualDagger"
-Ability1.AbilityName.Text = "Ritual Dagger"
-Ability1.KeybindName.Text = "Q + Crouching"
-Ability1.Image = "rbxassetid://119937664437884"
-Ability1.Clipping.Top.Image = "rbxassetid://119937664437884"
+Ability1.AbilityName.Text = "Dagger"
+Ability1.KeybindName.Text = "Q"
+Ability1.Image = "rbxassetid://129077533212750"
+Ability1.Clipping.Top.Image = "rbxassetid://129077533212750"
 local Ability2 = AbilityTemplate:Clone()
 Ability2.Parent = AbilityContainer
 Ability2.Name = "Crouch"
 Ability2.AbilityName.Text = "Crouch"
 Ability2.KeybindName.Text = "E"
-Ability2.Image = "rbxassetid://119937664437884"
-Ability2.Clipping.Top.Image = "rbxassetid://119937664437884"
+Ability2.Image = "rbxassetid://77707049887484"
+Ability2.Clipping.Top.Image = "rbxassetid://77707049887484"
 local Ability3 = AbilityTemplate:Clone()
 Ability3.Name = "Ritual"
 Ability3.Parent = AbilityContainer
 Ability3.AbilityName.Text = "Ritual"
 Ability3.KeybindName.Text = "R"
-Ability3.Image = "rbxassetid://119937664437884"
-Ability3.Clipping.Top.Image = "rbxassetid://119937664437884"
+Ability3.Image = "rbxassetid://95580729656404"
+Ability3.Clipping.Top.Image = "rbxassetid://95580729656404"
 local RunningToggle = character.SpeedMultipliers.Sprinting
 local FOVToggle = character.FOVMultipliers.Sprinting
 -----Weapon
@@ -122,6 +122,11 @@ stabSFX.SoundId = "rbxassetid://99820161736138"
 stabSFX.Volume = 1.45  
 stabSFX.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")  
 stabSFX:Play()
+local standingstabSFX = Instance.new("Sound")
+standingstabSFX.SoundId = "rbxassetid://86710781315432"
+standingstabSFX.Volume = 1.45  
+standingstabSFX.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")  
+standingstabSFX:Play()
 -------------------------------------------------
 --StaminaDrain toggle
     local function staminadrainono(state)
@@ -211,6 +216,8 @@ runAnim.AnimationId = "rbxassetid://93499989310243"
 
 local slashAnim = Instance.new("Animation")
 slashAnim.AnimationId = "rbxassetid://119256819262245"
+local standingslashAnim = Instance.new("Animation")
+standingslashAnim.AnimationId = "rbxassetid://86545133269813"
 
 local m1Anim = Instance.new("Animation")
 m1Anim.AnimationId = "rbxassetid://119256819262245"
@@ -282,7 +289,7 @@ local function getNearbyPlayer(range)
 	return nil
 end
 --SWING FUNCTION
-local function swing()
+local function swing(crouchin)
 local hitbox = Instance.new("Part")
 hitbox.Material = Enum.Material.ForceField
 hitbox.Size = Vector3.new(6, 5, 6)
@@ -317,9 +324,16 @@ fakehbx.Parent = workspace
 fakehbx.Color = Color3.fromRGB(0, 255, 0)
 game.Debris:AddItem(fakehbx, 1)
 if Stabs < 3 then
+if crouchin then
 Stabs += 1
+if Stabs > 3 then
+	Stabs = 3
 end
-print("Hit killer!")
+else
+Stabs += 0.5
+end
+print("Hit killer! Stabs are now "..Stabs)
+end
 end
 end)
 end
@@ -442,8 +456,9 @@ UserInputService.InputBegan:Connect(function(input, gp)
 	if gp then return end
     if Helpless then return end
     if knifeDebounce then return end
+	if crouchDebounce then return end
     if character.Humanoid.Health <= 0 then return end
-	if input.KeyCode == Enum.KeyCode.Q and active then
+	if input.KeyCode == Enum.KeyCode.Q then
         task.spawn(function()
         knifeDebounce = true
          Ability1.Clipping.Top.Visible = false
@@ -464,10 +479,11 @@ UserInputService.InputBegan:Connect(function(input, gp)
       player.PlayerGui.MainUI.StatusContainer:FindFirstChild("Undetectable-Artificial"):Destroy()
     end
 			stopAbilityAnims()
+			local standingSlashTrack = humanoid:LoadAnimation(standingslashAnim)
             local slashTrack = humanoid:LoadAnimation(slashAnim)
-			slashTrack:Play()
+			if crouching then
+				slashTrack:Play()
             crouching = false
-			active = false
             stabSFX:Play()
             freezePlayer()
             task.wait(0.5)
@@ -475,8 +491,19 @@ UserInputService.InputBegan:Connect(function(input, gp)
     
             			stopAbilityAnims()
                         crouching = false
-			active = false
-            swing()
+            swing(active)
+            			active = false
+			else
+				standingSlashTrack:Play()
+				  crouching = false
+           standingstabSFX:Play()
+            unfreezePlayer()
+    
+            			stopAbilityAnims()
+                        crouching = false
+            swing(active)
+            			active = false
+			end
 	end
 end)
 
