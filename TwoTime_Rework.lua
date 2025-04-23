@@ -33,11 +33,11 @@ task.spawn(function()
 addStatusEffect("Speed", "II", time)
 end)
 for i = 1,time * 100 do
-	character.SpeedMultipliers.Sprinting.Value = 2.2
+	character.SpeedMultipliers.Sprinting.Value = 3
 		task.wait(0.01)
 end
 if character.FOVMultipliers.Sprinting.Value == 1.125 then
-	character.SpeedMultipliers.Sprinting.Value = 1.65
+	character.SpeedMultipliers.Sprinting.Value = 2.167
 else
 	character.SpeedMultipliers.Sprinting.Value = 1
 end
