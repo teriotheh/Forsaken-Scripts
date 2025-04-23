@@ -3,7 +3,7 @@ local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
-local character = player.Character or player.CharacterAdded:Wait()
+local character = player.character or player.characterAdded:Wait()
 local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
 ---------------------------------------------------------TWO TIME REWORK
 function Format(Int)
@@ -26,6 +26,22 @@ function addStatusEffect(status, power, timer)
     task.wait(1)
     end
     Status:Destroy()
+end
+function giveSpeed(time)
+task.spawn(function()
+task.spawn(function()
+addStatusEffect("Speed", "II", time)
+end)
+for i = 1,time * 100 do
+	character.SpeedMultipliers.Sprinting.Value = 2.2
+		task.wait(0.01)
+end
+if character.FOVMultipliers.Sprinting.Value == 1.125 then
+	character.SpeedMultipliers.Sprinting.Value = 1.65
+else
+	character.SpeedMultipliers.Sprinting.Value = 1
+end
+end)
 end
 local fzAnim = Instance.new("Animation")
 fzAnim.AnimationId = "rbxassetid://117339039533356"
@@ -111,12 +127,12 @@ local FOVToggle = character.FOVMultipliers.Sprinting
 
     local weld = Instance.new("Weld")
     weld.Part0 = handle
-    weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Right Arm")
+    weld.Part1 = game.Players.LocalPlayer.character:FindFirstChild("Right Arm")
     weld.C0 = CFrame.new(1.75, -0.879999995, 0, -1.31445322e-05, 1, 0, 0, -0, 1, 1, 1.31445331e-05, -7.10549173e-15)
     weld.C1 = CFrame.new(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
     weld.Parent = handle
 
-    knife.Parent = game.Players.LocalPlayer.Character
+    knife.Parent = game.Players.LocalPlayer.character
 local stabSFX = Instance.new("Sound")
 stabSFX.SoundId = "rbxassetid://99820161736138" 
 stabSFX.Volume = 1.45  
@@ -133,7 +149,7 @@ standingstabSFX:Play()
 
         stam = state
 
-        local stamscript = require(game.ReplicatedStorage.Systems.Character.Game.Sprinting)
+        local stamscript = require(game.ReplicatedStorage.Systems.character.Game.Sprinting)
 
         
 
@@ -158,7 +174,7 @@ standingstabSFX:Play()
         end)
 
     end 
---CHARGES SYSTEM
+--characterGES SYSTEM
 task.spawn(function()
 while task.wait() do
   if crouching then
@@ -195,7 +211,7 @@ while task.wait() do
   end
 end
 end)
---CHARGES SYSTEM
+--characterGES SYSTEM
 local humanoid = character:WaitForChild("Humanoid")
 local mouse = player:GetMouse()
 
@@ -279,8 +295,8 @@ end
 -- Check if near a player
 local function getNearbyPlayer(range)
 	for _, target in pairs(Players:GetPlayers()) do
-		if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-			local distance = (character.HumanoidRootPart.Position - target.Character.HumanoidRootPart.Position).Magnitude
+		if target ~= player and target.character and target.character:FindFirstChild("HumanoidRootPart") then
+			local distance = (character.HumanoidRootPart.Position - target.character.HumanoidRootPart.Position).Magnitude
 			if distance <= range then
 				return target
 			end
@@ -323,6 +339,11 @@ hitbox:Destroy()
 fakehbx.Parent = workspace
 fakehbx.Color = Color3.fromRGB(0, 255, 0)
 game.Debris:AddItem(fakehbx, 1)
+if crouchin then
+	giveSpeed(10)
+else
+	giveSpeed(4)
+end
 if Stabs < 3 then
 if crouchin then
 Stabs += 1
@@ -331,6 +352,7 @@ if Stabs > 3 then
 end
 else
 Stabs += 0.5
+
 end
 print("Hit killer! Stabs are now "..Stabs)
 end
@@ -341,7 +363,7 @@ end
 -- Behind check: if you're behind the target, the vector from the target to you
 -- will be nearly opposite to the target's LookVector (dot product close to -1).
 local function isBehindTarget(target)
-	local targetHRP = target.Character and target.Character:FindFirstChild("HumanoidRootPart")
+	local targetHRP = target.character and target.character:FindFirstChild("HumanoidRootPart")
 	local myHRP = character:FindFirstChild("HumanoidRootPart")
 	if not targetHRP or not myHRP then 
 		return false 
@@ -554,7 +576,7 @@ if character.Humanoid.MaxHealth == 40 then
         tpSFX:Play()  -- Play teleport sound
         canTeleport = false  -- Disable teleport until B is pressed again
    else
-    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    game.Players.LocalPlayer.character.Humanoid.Health = 0
    end
 end
 end)
