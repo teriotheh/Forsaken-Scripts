@@ -9,7 +9,7 @@ local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
 local Dead = false
 ---------------------------------------------------------TERIO CHARACTER
 if character.Name == "Shedletsky" then
-
+character.Name = "Terio"
 --UI
 for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
 	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
@@ -607,6 +607,7 @@ for i,plr in pairs(game.Players:GetPlayers()) do
 		v.SurvivorName.Text = "Terio"
 		v.Icon.Image = "rbxassetid://112952494470082"
 	end
+        targetChar.Name = "Terio"
 end
 
 		   for i,v in pairs(targetChar:GetDescendants()) do
