@@ -9,6 +9,7 @@ local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
 local Dead = false
 ---------------------------------------------------------TERIO CHARACTER
 if character.Name == "Shedletsky" then
+character.Archivable = true
 character.Name = "Terio"
 --UI
 for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
