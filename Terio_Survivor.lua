@@ -602,6 +602,13 @@ for i,plr in pairs(game.Players:GetPlayers()) do
         if msg == "_sync_terio_" and plr.Name ~= game.Players.LocalPlayer.Name and not table.find(syncedTable, plr.Name) then
            local targetChar = plr.Character
 		   table.insert(syncedTable, plr.Name)
+	for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, plr.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = "rbxassetid://112952494470082"
+	end
+end
+
 		   for i,v in pairs(targetChar:GetDescendants()) do
 	if v:IsA("Accessory") or v:IsA("Hat") or v.Name == "Pants" or v.Name == "Shirt" or v.Name == "ExpressionHolder" or v.Name == "Body Colors" then
 		v:Destroy()
