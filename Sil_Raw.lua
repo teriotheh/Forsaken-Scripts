@@ -1,5 +1,7 @@
+
 local character = game.Players.LocalPlayer.Character
 local player = game.Players.LocalPlayer
+if game.Players.LocalPlayer.Character.Name == "1x1x1x1" then
 local Dead = false
 character.Highlight:Destroy()
 character.ExtraModels:Destroy()
@@ -303,8 +305,8 @@ humanoid.Animator.AnimationPlayed:Connect(onAnimationPlayed)
    workspace.Themes.ChildAdded:Connect(function(v)
      if v.Name == "rbxassetid://97690757653206" then
        v.SoundId = getcustomasset("TerioThings/sil_layer4.mp3")
-     elseif v.Name == "LastSurvivor" then
-      --guh
+     elseif v.Name == "LastSurvivor" and game.Workspace.Players.Survivors:FindFirstChild("Shedletsky") then
+      v.SoundId = getcustomasset("TerioThings/sil_terio_lms.ogg")
      end
    end)
 
@@ -315,3 +317,138 @@ end)
 game.Players.LocalPlayer.Character:GetPropertyChangedSignal("Name"):Connect(function()
     Dead = true
 end)
+end
+
+
+-----MULTIPLAYER
+local syncedTable = {}
+for i,plr in pairs(game.Players:GetPlayers()) do
+   plr.Chatted:Connect(function(msg)
+     if Dead then return end
+        if msg == "_sync_sil_" and plr.Name ~= game.Players.LocalPlayer.Name and not table.find(syncedTable, plr.Name) then
+           local targetChar = plr.Character
+		   table.insert(syncedTable, plr.Name)
+		   targetChar.Highlight:Destroy()
+targetChar.ExtraModels:Destroy()
+targetChar.Torso.Transparency = 0
+---------SIL KILLER (OOTHER PPL VER)
+--APPEARANCE
+targetChar:ScaleTo(1.06)
+task.spawn(function()
+local Whip = game:GetObjects(121467375821164)
+WhipC0 = CFrame.new(0, -6, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Whip) do
+v.Name = "Whip"
+	v.Parent = targetChar
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = targetChar["Left Arm"]
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = WhipC0
+	v.Handle.SpecialMesh.Scale = Vector3.new(1.2622312307357788, 10, 1)
+	v.Handle.CanCollide = false
+	v.Handle.SpecialMesh.TextureId = ""
+	v.Handle.Color = Color3.fromRGB(255, 0, 0)
+	v.Handle.Transparency = 1
+	function whiptransparency(transparence)
+       if transparence == 1 then
+	       v.Handle.Transparency = 0
+		   for i = 1,25 do
+		       v.Handle.Transparency += 0.05
+			   task.wait(0.000001)
+		   end
+	   elseif transparence == 0 then
+		   	       v.Handle.Transparency = 1
+		   for i = 1,25 do
+		       v.Handle.Transparency -= 0.05
+			   task.wait(0.000001)
+		   end
+	   end
+	end
+end
+local Scarf = game:GetObjects(13551519963)
+ScarfC0 = CFrame.new(0, -1.60000002, 1.30000007, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scarf) do
+v.Name = "Scarf"
+	v.Parent = targetChar
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = targetChar["Head"]
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScarfC0
+end
+local Hair1 = game:GetObjects(132852136465111)
+Hair1C0 = CFrame.new(0, -0.569999993, 0.100000001, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Hair1) do
+v.Name = "Hair1"
+	v.Parent = targetChar
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = targetChar["Head"]
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair1C0
+end
+local HardBloodLeftArm = game:GetObjects(84426465822673)
+HardBloodLeftArmC0 = CFrame.new(0, -0.349999994, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(HardBloodLeftArm) do
+v.Name = "HardBloodLeftArm"
+	v.Parent = targetChar
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = targetChar["Left Arm"]
+	HairWeld.Part1 = v.Handle
+	v.Handle.SpecialMesh.TextureId = ""
+	HairWeld.C0 = HardBloodLeftArmC0
+	v.Handle.Color = Color3.fromRGB(103, 0, 0)
+end
+local HardBloodRightArm = game:GetObjects(84426465822673)
+HardBloodRightArmC0 = CFrame.new(0, -0.349999994, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(HardBloodRightArm) do
+v.Name = "HardBloodRightArm"
+	v.Parent = targetChar
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = targetChar["Right Arm"]
+	HairWeld.Part1 = v.Handle
+	v.Handle.SpecialMesh.TextureId = ""
+	HairWeld.C0 = HardBloodRightArmC0
+	v.Handle.Color = Color3.fromRGB(103, 0, 0)
+end
+
+local FaceExpression = Instance.new("Decal")
+FaceExpression.Parent = targetChar.Head
+FaceExpression.Texture = "rbxassetid://79565455816327"
+FaceExpression.Face = "Front"
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = targetChar
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=13927405506"
+Shirt.Color3 = Color3.fromRGB(70, 0, 0)
+local Pants = Instance.new("Pants")
+Pants.Parent = targetChar
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=13927410546"
+Pants.Color3 = Color3.fromRGB(10, 0, 0)
+while task.wait() do
+   for i,v in pairs(targetChar:GetChildren()) do
+	   if v:IsA("BasePart") then
+		   v.Color = Color3.fromRGB(255, 255, 255)
+		   v.Material = Enum.Material.SmoothPlastic
+		end
+   end
+      for i,v in pairs(targetChar:GetDescendants()) do
+	   if v:IsA("ParticleEmitter") then
+		   if v.Name == "ParticleEmitter" then
+			   v.Color = ColorSequence.new(Color3.fromRGB(150, 0, 0), Color3.fromRGB(0, 0, 0))
+		   else
+			  v:Destroy() 
+		   end
+	   	elseif v:IsA("Decal") and v.Name  == "face" then
+		   v:Destroy()
+	   elseif v:IsA("Attachment") and string.find(v.Name, "Chain") or v.Name == "RightEye" and v:IsA("Attachment") then
+		   v:Destroy()
+	   end
+   end
+end
+end)
+		end
+     end)
+   end
