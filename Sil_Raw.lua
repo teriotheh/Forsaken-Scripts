@@ -307,6 +307,7 @@ humanoid.Animator.AnimationPlayed:Connect(onAnimationPlayed)
        v.SoundId = getcustomasset("TerioThings/sil_layer4.mp3")
      elseif v.Name == "LastSurvivor" and game.Workspace.Players.Survivors:FindFirstChild("Shedletsky") then
       v.SoundId = getcustomasset("TerioThings/sil_terio_lms.ogg")
+      v.Volume = 1.5
      end
    end)
 
