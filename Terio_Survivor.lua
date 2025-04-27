@@ -428,7 +428,7 @@ UserInputService.InputBegan:Connect(function(input, gp)
     if CoagulateDebounce then return end
     if Helpless then return end
     if character.Humanoid.Health <= 0 then return end
-	if Dead then return end
+    if Dead then return end
 	if input.KeyCode == Enum.KeyCode.E then
 	task.spawn(function()
         CoagulateDebounce = true
@@ -588,6 +588,9 @@ workspace.Players.Survivors.ChildRemoved:Connect(function()
   Stabs += 1
 end)
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
+    Dead = true
+end)
+game.Players.LocalPlayer.Character:GetPropertyChangedSignal("Name"):Connect(function()
     Dead = true
 end)
 end
