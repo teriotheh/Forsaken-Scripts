@@ -173,6 +173,7 @@ end)
 workspace.Map.Ingame.ChildAdded:Connect(function(v)
 if Dead then return end
 if v.Name == "Swords" then
+	repeat task.wait() until v:FindFirstChild("Core")
 	v.Core.FrontFar:Destroy()
 	for i = 1,0.075 * 100 do
 	for i,v in pairs(character:GetDescendants()) do
