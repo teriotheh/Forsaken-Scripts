@@ -1,4 +1,134 @@
- 
+----DEV SETTINGS----
+terioicon = "rbxassetid://115704573151422"
+teriomancheganicon = "rbxassetid://112752773944406"
+ability1icon = "rbxassetid://86446809053120"
+ability2icon = "rbxassetid://97128711074466"
+ability3icon = "rbxassetid://89599029084803"
+-----------------------------------------------
+if game.Players.LocalPlayer:FindFirstChild("TerioON") then 
+print("Terio Disabled!")
+game.Players.LocalPlayer:FindFirstChild("TerioON"):Destroy()
+return
+end
+print("Terio Enabled!")
+local TerioToggle = Instance.new("Folder")
+TerioToggle.Parent = game.Players.LocalPlayer
+TerioToggle.Name = "TerioON"
+local TerioUsed = Instance.new("Folder")
+TerioUsed.Parent = game.Players.LocalPlayer
+TerioUsed.Name = "TerioUsed"
+---------------------------------------------------------TERIO UI
+task.spawn(function()
+local player = game.Players.LocalPlayer
+task.spawn(function()
+player.PlayerGui.NotificationUI.NotificationStorage.ChildAdded:Connect(function(v)
+if not player:FindFirstChild("TerioON") then return end
+if v:IsA("Frame") then
+	if v.Main.Titles.Primary.Text == "Received 'Modern' Skin" then
+		v.Main.Titles.Primary.Text = "Received 'Manchegan' Skin"
+		v.Main.Titles.Secondary.Text = '"I am Terio... of La Manchaland"'
+		v.Main.Card.CharacterRender.Image = teriomancheganicon
+	elseif v.Main.Titles.Primary.Text == "Shedletsky Leveled Up!" then
+		v.Main.Titles.Primary.Text = "Terio Leveled Up!"
+	end
+end
+end)
+player.PlayerGui.MainUI.ShopScreen.ChildAdded:Connect(function(child)
+if not player:FindFirstChild("TerioON") then return end
+if child.Name ~= "ConfirmPurchase" then return end
+if player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text == 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">Modern</font></b> for <b><font color="rgb(255,255,255)">200$</font></b>?' then
+	player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text = 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">Manchegan</font></b> for <b><font color="rgb(255,255,255)">200$</font></b>?'
+end
+end)
+player.PlayerGui.MainUI.ShopScreen.ShopRoot.SkinsContainer.Contents.ChildAdded:Connect(function(v)
+if v:IsA("Frame") then
+	if string.find(v.Name, "Shedletsky") and v.Name ~= "ModernShedletsky" then
+		v:Destroy()
+	elseif v.Name == "ModernShedletsky" then
+		v.Name = "MancheganTerio"
+		v.Container.Title.Text = "Manchegan"
+		v.Container.Price.Text = "200$"
+		v.Container.CharacterRender.Image = teriomancheganicon
+
+	end
+end
+end)
+player.PlayerGui.MainUI.InventoryScreen.InventoryRoot.SkinsContainer.Contents.ChildAdded:Connect(function(v)
+if v:IsA("Frame") then
+    if v.Name == "ModernShedletsky" then
+		v.Container.Title.Text = "Manchegan"
+		v.Container.CharacterRender.Image = teriomancheganicon
+
+	end
+end
+end)
+player.PlayerGui.DescendantAdded:Connect(function(v)
+	if game.Players.LocalPlayer:FindFirstChild("TerioON") then
+		    if v.Parent.Parent == "CurrentSurvivors" then return end
+			if v:IsA("ImageLabel") and v.Image == "rbxassetid://90318481007675" then
+				v.Image = terioicon
+				print("siller")
+			elseif v:IsA("TextLabel") and v.Text == "Shedletsky" then
+				v.Text = "Terio"
+				print("saller")
+			elseif v:IsA("TextLabel") and v.Text == "SHEDLETSKY" then
+				v.Text = "TERIO"
+				print("saller")
+			elseif v:IsA("TextLabel") and v.Text == '"BLAME JOHN!"' then
+				v.Text = '"Blood is blood... No matter where it comes from."'
+				print("saller")
+			elseif v:IsA("TextLabel") and string.find(v.Text, "Linked Sword") then
+				v.Text = "A lonely bloodfiend who only cares about himself and the blood he gains. Too far gone into the starvation to hold himself back. Benefits off of other people's deaths by absorbing their blood."
+				v.MaxVisibleGraphemes = 500
+			elseif v:IsA("TextLabel") and string.find(v.Text, "Difficulty: ★★☆☆☆") then
+				v.Text = string.gsub(v.Text, "Difficulty: ★★☆☆☆", "Difficulty: ★★★☆☆")
+			elseif v:IsA("TextLabel") and string.find(v.Text, 'Death before dishonor.') then
+				v.Text = '"Why are you still using hardblood weapons? Have some fashion." - Sil'
+			elseif v:IsA("TextLabel") and string.find(v.Text, "SLASH") and v.Name == "Header" then
+				v.Text = "PIERCE"
+			elseif v:IsA("ImageLabel") and v.Image == "rbxassetid://85282571177550" then
+				v.Image = ability1icon
+			elseif v:IsA("TextLabel") and string.find(v.Text, "Shedletsky equips one of his many SFOTH swords and slashes") then
+				v.Text = string.gsub(v.Text, "Shedletsky equips one of his many SFOTH swords and slashes", "Terio unsheathes his hardblood spear and pierces the enemy")
+			elseif v:IsA("TextLabel") and v.Text == "FRIED CHICKEN" and v.Name == "Header" then
+			v.Text = "COAGULATE"
+				local abilitything = v.Parent
+				abilitything.Quote.Text = '"Sil, you need to get used to drinking blood again.. How long has it been!?" - Terio'
+				abilitything.TextContainer.Image.Image = ability2icon
+				abilitything.TextContainer.Title.Text = "Cooldown: 70s\nTerio hesitantly prepares his arm and takes a bite\nof it, coagulating his wounds and restoring\n35 HP over the span of 10s.\nIf terio is hit during this process, his wounds will renew and his healing will stop.\nThis ability can only be used TWICE!"
+				local abilitything2 = v.Parent:Clone()
+				abilitything2.Header.Text = "FEED"
+				abilitything2.Parent = v.Parent.Parent
+				abilitything2.Quote.Text = '"Saying that I look starved? SAYING THAT I LOOK STARVED??? LOOK AT YOU!!! YOU HAVENT DRANK BLOOD IN A YEAR!!!!!" - Terio'
+				abilitything2.TextContainer.Image.Image = ability3icon
+				abilitything2.TextContainer.Title.Text = "Cooldown: 50s\nFor every survivor dead, no matter the cause, Terio gains one charge on this ability. Each use,\nTerio consumes one charge and gains Speed III for 3 seconds."
+				abilitything2.TextContainer.Title.MaxVisibleGraphemes = 500
+			end
+		    else
+				
+			end
+end)
+player.PlayerGui.MainUI.InventoryScreen.InventoryRoot.SideContainer.PreviewContainer.Render:GetPropertyChangedSignal("Image"):Connect(function()
+  if player.PlayerGui.MainUI.InventoryScreen.InventoryRoot.SideContainer.PreviewContainer.Render.Image == "rbxassetid://90318481007675" then
+	  player.PlayerGui.MainUI.InventoryScreen.InventoryRoot.SideContainer.PreviewContainer.Render.Image = terioicon
+      player.PlayerGui.MainUI.InventoryScreen.InventoryRoot.SideContainer.PreviewContainer.Title.Text = "Terio"
+  end
+end)
+while task.wait() do
+	for i,v in pairs(game.Players.LocalPlayer.PlayerGui.MainUI:GetDescendants()) do
+		if v:IsA("TextLabel") and string.find(v.Text, "A lonely") then
+				v.Text = "A lonely bloodfiend who only cares about himself and the blood he gains. Too far gone into the starvation to hold himself back. Benefits off of other people's deaths by absorbing their blood."
+				v.MaxVisibleGraphemes = 500
+		end
+	end
+end
+end)
+end)
+---------------------------------------------------------TERIO CHARACTER
+game.Players.LocalPlayer.CharacterRemoving:Connect(function()
+if not game.Players.LocalPlayer:FindFirstChild("TerioON") then return end
+if game.Players.LocalPlayer:FindFirstChild("TerioUsed") then return end
+task.wait(2.5)
 local Players = game:GetService("Players")
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
@@ -7,13 +137,25 @@ local ContextActionService = game:GetService("ContextActionService")
 local character = player.character or player.characterAdded:Wait()
 local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
 local Dead = false
----------------------------------------------------------TERIO CHARACTER
+print("not losag")
 if character.Name == "Shedletsky" then
+if character:FindFirstChild("CurrentlyTerio") then return end
+local tag = "CurrentlyTerio"..math.random(1, 99999999)
+local CurrentlyTerioTag = Instance.new("Folder")
+CurrentlyTerioTag.Parent = character
+CurrentlyTerioTag.Name = tag
+local TagCheck = character:FindFirstChild(tag)
+print("guh")
+for i,v in pairs(character:GetChildren()) do
+  if string.find(v.Name, "CurrentlyTerio") and v.Name ~= tag then
+	  v:Destroy()
+  end
+end
 --UI
 for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
 	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
 		v.SurvivorName.Text = "Terio"
-		v.Icon.Image = "rbxassetid://112952494470082"
+		v.Icon.Image = terioicon
 	end
 end
 
@@ -43,6 +185,7 @@ function addStatusEffect(status, power, timer)
     Status:Destroy()
 end
 function giveSpeed(time)
+if not TagCheck then return end
 task.spawn(function()
 task.spawn(function()
 addStatusEffect("Speed", "III", time)
@@ -101,12 +244,15 @@ end
 
 --SHEDLETSKY CONFIGURATION AND APPEARANCE
 for i,v in pairs(character:GetDescendants()) do
+if not TagCheck then return end
 	if v:IsA("Accessory") or v:IsA("Hat") or v.Name == "Pants" or v.Name == "Shirt" or v.Name == "ExpressionHolder" or v.Name == "Body Colors" then
+	if string.find(v.Name, "Lance") or string.find(v.Name, "Terio") then return end
 		v:Destroy()
 	end
 end
 task.spawn(function()
 while task.wait() do
+if not TagCheck then return end
 if Dead then return end
 for i,v in pairs(character:GetDescendants()) do
 	if v:IsA("BasePart") then
@@ -126,6 +272,7 @@ local Hair1 = game:GetObjects(15347329623)
 local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair1) do
 	v.Parent = character
+	v.Name = "TerioHair1"
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -136,6 +283,7 @@ local Hair2 = game:GetObjects(17612852370)
 local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair2) do
 	v.Parent = character
+	v.Name = "TerioHair2"
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -147,10 +295,74 @@ FaceExpression.Parent = character.Head
 FaceExpression.Texture = "rbxassetid://133089396665213"
 FaceExpression.Face = "Front"
 task.spawn(function()
+if character:FindFirstChild("Chicken") then
 character.Chicken:Destroy()
 character.Sword:Destroy()
+end
 end)
-------
+----------SKIN HANDLER (YOURSELF)
+if player.PlayerData.Equipped.Skins.Shedletsky.Value == "ModernShedletsky" then
+for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomancheganicon
+	end
+end
+if character:FindFirstChild("TerioHair1") then
+character["TerioHair1"]:Destroy()
+character["TerioHair2"]:Destroy()
+end
+for i,v in pairs(character:GetChildren()) do
+	if v.Name == "Clothing" then
+		v:Destroy()
+	end
+end
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = character
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=77697773617559"
+local Pants = Instance.new("Pants")
+Pants.Parent = character
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=134919602560582"
+local Hair1 = game:GetObjects(18395424448)
+local Hair1C0 = CFrame.new(0, -0.699999988, 0, 0.0995037258, 0, 0.995037138, 0, 1, 0, 0.995037258, 0, -0.099503696)
+for i,v in pairs(Hair1) do
+v.Name = "Accessory (defaultAccessory)"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair1C0
+end
+local Hair2 = game:GetObjects(114070595923909)
+local Hair2C0 = CFrame.new(0.0500000007, 0, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Hair2) do
+v.Name = "Accessory (Lannscyfe_Hair [Teal])"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair2C0
+end
+local Patch = game:GetObjects(12353001889)
+local PatchC0 = CFrame.new(0.200000003, 0.25, -1.40000003e-08, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Patch) do
+v.Name = "Terio_EyePatch"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = PatchC0
+end
+end
+
+
+
+
+
+-----------------------
 local crouching = false
 local Helpless = false
 local Ability1 = AbilityContainer.Slash
@@ -158,21 +370,21 @@ Ability1.Parent = AbilityContainer
 Ability1.Name = "Pierce"
 Ability1.AbilityName.Text = "Pierce"
 Ability1.KeybindName.Text = "Q"
-Ability1.Image = "rbxassetid://86446809053120"
-Ability1.Clipping.Top.Image = "rbxassetid://86446809053120"
+Ability1.Image = ability1icon
+Ability1.Clipping.Top.Image = ability1icon
 local Ability2 = AbilityContainer.FriedChicken
 Ability2.Parent = AbilityContainer
 Ability2.AbilityName.Text = "Coagulate"
 Ability2.KeybindName.Text = "E"
-Ability2.Image = "rbxassetid://97128711074466"
-Ability2.Clipping.Top.Image = "rbxassetid://97128711074466"
+Ability2.Image = ability2icon
+Ability2.Clipping.Top.Image = ability2icon
 local Ability3 = AbilityTemplate:Clone()
 Ability3.Name = "Feed"
 Ability3.Parent = AbilityContainer
 Ability3.AbilityName.Text = "Feed"
 Ability3.KeybindName.Text = "R"
-Ability3.Image = "rbxassetid://89599029084803"
-Ability3.Clipping.Top.Image = "rbxassetid://89599029084803"
+Ability3.Image = ability3icon
+Ability3.Clipping.Top.Image = ability3icon
 Ability3.LayoutOrder = 3
 local RunningToggle = character.SpeedMultipliers.Sprinting
 local FOVToggle = character.FOVMultipliers.Sprinting
@@ -424,11 +636,12 @@ end
 
 -- Ability Activation using the E key
 UserInputService.InputBegan:Connect(function(input, gp)
+if not TagCheck then return end
 	if gp then return end
     if CoagulateDebounce then return end
     if Helpless then return end
     if character.Humanoid.Health <= 0 then return end
-    if Dead then return end
+	if Dead then return end
 	if input.KeyCode == Enum.KeyCode.E then
 	task.spawn(function()
         CoagulateDebounce = true
@@ -474,6 +687,7 @@ end)
 
 -- Slash with behind check (exits ability if conditions are not met)
 UserInputService.InputBegan:Connect(function(input, gp)
+if not TagCheck then return end
 	if gp then return end
     if Helpless then return end
     if PierceDebounce then return end
@@ -590,11 +804,8 @@ end)
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
     Dead = true
 end)
-game.Players.LocalPlayer.Character:GetPropertyChangedSignal("Name"):Connect(function()
-    Dead = true
-end)
 end
-
+end)
 ----OTHER PLAYERS (MULTIPLAYER)
 ----------------------------
 local syncedTable = {}
@@ -607,13 +818,12 @@ for i,plr in pairs(game.Players:GetPlayers()) do
 	for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
 	if v:IsA("Frame") and string.find(v.Username.Text, plr.Name) then
 		v.SurvivorName.Text = "Terio"
-		v.Icon.Image = "rbxassetid://112952494470082"
-	end
-        
-end
-
+		v.Icon.Image = terioicon
+	end        
+    end
 		   for i,v in pairs(targetChar:GetDescendants()) do
 	if v:IsA("Accessory") or v:IsA("Hat") or v.Name == "Pants" or v.Name == "Shirt" or v.Name == "ExpressionHolder" or v.Name == "Body Colors" then
+	if string.find(v.Name, "Lance") or string.find(v.Name, "Terio") then return end
 		v:Destroy()
 	end
 end
@@ -638,6 +848,7 @@ local Hair1 = game:GetObjects(15347329623)
 local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair1) do
 	v.Parent = targetChar
+	v.Name = "TerioHair1"
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = targetChar.Head
@@ -648,6 +859,7 @@ local Hair2 = game:GetObjects(17612852370)
 local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair2) do
 	v.Parent = targetChar
+	v.Name = "TerioHair2"
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = targetChar.Head
