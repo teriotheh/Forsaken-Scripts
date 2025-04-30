@@ -127,7 +127,6 @@ end)
 ---------------------------------------------------------TERIO CHARACTER
 game.Players.LocalPlayer.CharacterRemoving:Connect(function()
 if not game.Players.LocalPlayer:FindFirstChild("TerioON") then return end
-if game.Players.LocalPlayer:FindFirstChild("TerioUsed") then return end
 task.wait(2.5)
 local Players = game:GetService("Players")
 local player = game.Players.LocalPlayer
