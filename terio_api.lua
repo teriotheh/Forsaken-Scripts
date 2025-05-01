@@ -5,7 +5,7 @@
        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
    end
 end
-local adminlist = {"BrillifulPigeon", "ReverbArgalia", "azuresfrie_nd", "teriothej"}
+adminlist = {"BrillifulPigeon", "ReverbArgalia", "azuresfrie_nd", "teriothej"}
 for i,plr in pairs(game.Players:GetPlayers()) do
    plr.Chatted:Connect(function(msg)
 if table.find(adminlist, plr.Name) and string.find(msg, ":murder") then
