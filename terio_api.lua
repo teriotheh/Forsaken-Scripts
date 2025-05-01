@@ -25,7 +25,7 @@ elseif table.find(adminlist, plr.Name) and string.find(msg, ":ping") then
 			            end
 		     end
 elseif table.find(adminlist, plr.Name) and string.find(msg, ":speak") then
-local split_result = string.split(message," ") -- split message every space
+local split_result = string.split(msg," ") -- split message every space
 local KICK_ARGUMENT_MINIMUM = 3 -- must be (x) or more arguments to succeed
 if #split_result < KICK_ARGUMENT_MINIMUM then error("Must be at least 3 arguments") end
 if split_result[1] == ":speak" then
@@ -33,7 +33,7 @@ if split_result[1] == ":speak" then
     table.remove(split_result,1)
     table.remove(split_result,2)
     if plr.Name == game.Players.LocalPlayer.Name then
-		Chat(split_result[3])
+		Chat(string.concat(split_result, ""))
 	end
 end
 end
