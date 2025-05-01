@@ -1,6 +1,10 @@
 ----DEV SETTINGS----
 terioicon = "rbxassetid://115704573151422"
 teriomancheganicon = "rbxassetid://112752773944406"
+teriomilestone1icon = "rbxassetid://104471834912500"
+teriomilestone2icon = "rbxassetid://123811292607283"
+teriomilestone3icon = "rbxassetid://97472023061874"
+teriomilestone4icon = "rbxassetid://101894574511804"
 ability1icon = "rbxassetid://86446809053120"
 ability2icon = "rbxassetid://97128711074466"
 ability3icon = "rbxassetid://89599029084803"
@@ -26,10 +30,28 @@ if not player:FindFirstChild("TerioON") then return end
 if v:IsA("Frame") then
 	if v.Main.Titles.Primary.Text == "Received 'Modern' Skin" then
 		v.Main.Titles.Primary.Text = "Received 'Manchegan' Skin"
+		v.Main.Titles.Secondary.Visible = true
 		v.Main.Titles.Secondary.Text = '"I am Terio... of La Manchaland"'
 		v.Main.Card.CharacterRender.Image = teriomancheganicon
+	elseif v.Main.Titles.Primary.Text == "Received 'Milestone I' Skin" then
+	v.Main.Card.CharacterRender.Image = teriomilestone1icon
+	v.Main.Titles.Secondary.Visible = true
+	v.Main.Titles.Secondary.Text = '"Ah.. Youre a bloodfiend too, Sil is it?"'
+	elseif v.Main.Titles.Primary.Text == "Received 'Milestone II' Skin" then
+	v.Main.Card.CharacterRender.Image = teriomilestone2icon
+	v.Main.Titles.Secondary.Visible = true
+	v.Main.Titles.Secondary.Text = '"Why doesnt he just embrace bloodfiendism?"'
+	elseif v.Main.Titles.Primary.Text == "Received 'Milestone III' Skin" then
+	v.Main.Card.CharacterRender.Image = teriomilestone3icon
+	v.Main.Titles.Secondary.Visible = true
+	v.Main.Titles.Secondary.Text = '"Listen, Sil.. Ive been worried recently.."'
+	elseif v.Main.Titles.Primary.Text == "Received 'Milestone IV' Skin" then
+	v.Main.Card.CharacterRender.Image = teriomilestone4icon
+	v.Main.Titles.Secondary.Visible = true
+	v.Main.Titles.Secondary.Text = '"Every bloodfiend is destined to self-hatred and insanity."'
 	elseif v.Main.Titles.Primary.Text == "Shedletsky Leveled Up!" then
 		v.Main.Titles.Primary.Text = "Terio Leveled Up!"
+		v.Main.Card.CharacterRender.Image = terioicon
 	end
 end
 end)
@@ -62,9 +84,8 @@ if v:IsA("Frame") then
 	end
 end
 end)
-player.PlayerGui.DescendantAdded:Connect(function(v)
+player.PlayerGui.MainUI.DescendantAdded:Connect(function(v)
 	if game.Players.LocalPlayer:FindFirstChild("TerioON") then
-		    if v.Parent.Parent == "CurrentSurvivors" then return end
 			if v:IsA("ImageLabel") and v.Image == "rbxassetid://90318481007675" then
 				v.Image = terioicon
 				print("siller")
@@ -143,7 +164,6 @@ local tag = "CurrentlyTerio"..math.random(1, 99999999)
 local CurrentlyTerioTag = Instance.new("Folder")
 CurrentlyTerioTag.Parent = character
 CurrentlyTerioTag.Name = tag
-local TagCheck = character:FindFirstChild(tag)
 print("guh")
 for i,v in pairs(character:GetChildren()) do
   if string.find(v.Name, "CurrentlyTerio") and v.Name ~= tag then
@@ -184,7 +204,7 @@ function addStatusEffect(status, power, timer)
     Status:Destroy()
 end
 function giveSpeed(time)
-if not TagCheck then return end
+if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 task.spawn(function()
 task.spawn(function()
 addStatusEffect("Speed", "III", time)
@@ -243,7 +263,7 @@ end
 
 --SHEDLETSKY CONFIGURATION AND APPEARANCE
 for i,v in pairs(character:GetDescendants()) do
-if not TagCheck then return end
+if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 	if v:IsA("Accessory") or v:IsA("Hat") or v.Name == "Pants" or v.Name == "Shirt" or v.Name == "ExpressionHolder" or v.Name == "Body Colors" then
 	if string.find(v.Name, "Lance") or string.find(v.Name, "Terio") then return end
 		v:Destroy()
@@ -251,7 +271,7 @@ if not TagCheck then return end
 end
 task.spawn(function()
 while task.wait() do
-if not TagCheck then return end
+if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 if Dead then return end
 for i,v in pairs(character:GetDescendants()) do
 	if v:IsA("BasePart") then
@@ -260,133 +280,6 @@ for i,v in pairs(character:GetDescendants()) do
 end
 end
 end)
---CLOTHING
-local Shirt = Instance.new("Shirt")
-Shirt.Parent = character
-Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=13132949672"
-local Pants = Instance.new("Pants")
-Pants.Parent = character
-Pants.PantsTemplate = "http://www.roblox.com/asset/?id=13132951176"
-local Hair1 = game:GetObjects(15347329623)
-local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-for i,v in pairs(Hair1) do
-	v.Parent = character
-	v.Name = "TerioHair1"
-	local HairWeld = Instance.new("Weld")
-	HairWeld.Parent = v.Handle
-	HairWeld.Part0 = character.Head
-	HairWeld.Part1 = v.Handle
-	HairWeld.C0 = Hair1C0
-end
-local Hair2 = game:GetObjects(17612852370)
-local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-for i,v in pairs(Hair2) do
-	v.Parent = character
-	v.Name = "TerioHair2"
-	local HairWeld = Instance.new("Weld")
-	HairWeld.Parent = v.Handle
-	HairWeld.Part0 = character.Head
-	HairWeld.Part1 = v.Handle
-	HairWeld.C0 = Hair2C0
-end
-local FaceExpression = Instance.new("Decal")
-FaceExpression.Parent = character.Head
-FaceExpression.Texture = "rbxassetid://133089396665213"
-FaceExpression.Face = "Front"
-task.spawn(function()
-if character:FindFirstChild("Chicken") then
-character.Chicken:Destroy()
-character.Sword:Destroy()
-end
-end)
-----------SKIN HANDLER (YOURSELF)
-if player.PlayerData.Equipped.Skins.Shedletsky.Value == "ModernShedletsky" then
-for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
-	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
-		v.SurvivorName.Text = "Terio"
-		v.Icon.Image = teriomancheganicon
-	end
-end
-if character:FindFirstChild("TerioHair1") then
-character["TerioHair1"]:Destroy()
-character["TerioHair2"]:Destroy()
-end
-for i,v in pairs(character:GetChildren()) do
-	if v.Name == "Clothing" then
-		v:Destroy()
-	end
-end
-local Shirt = Instance.new("Shirt")
-Shirt.Parent = character
-Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=77697773617559"
-local Pants = Instance.new("Pants")
-Pants.Parent = character
-Pants.PantsTemplate = "http://www.roblox.com/asset/?id=134919602560582"
-local Hair1 = game:GetObjects(18395424448)
-local Hair1C0 = CFrame.new(0, -0.699999988, 0, 0.0995037258, 0, 0.995037138, 0, 1, 0, 0.995037258, 0, -0.099503696)
-for i,v in pairs(Hair1) do
-v.Name = "Accessory (defaultAccessory)"
-	v.Parent = character
-	local HairWeld = Instance.new("Weld")
-	HairWeld.Parent = v.Handle
-	HairWeld.Part0 = character.Head
-	HairWeld.Part1 = v.Handle
-	HairWeld.C0 = Hair1C0
-end
-local Hair2 = game:GetObjects(114070595923909)
-local Hair2C0 = CFrame.new(0.0500000007, 0, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-for i,v in pairs(Hair2) do
-v.Name = "Accessory (Lannscyfe_Hair [Teal])"
-	v.Parent = character
-	local HairWeld = Instance.new("Weld")
-	HairWeld.Parent = v.Handle
-	HairWeld.Part0 = character.Head
-	HairWeld.Part1 = v.Handle
-	HairWeld.C0 = Hair2C0
-end
-local Patch = game:GetObjects(12353001889)
-local PatchC0 = CFrame.new(0.200000003, 0.25, -1.40000003e-08, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-for i,v in pairs(Patch) do
-v.Name = "Terio_EyePatch"
-	v.Parent = character
-	local HairWeld = Instance.new("Weld")
-	HairWeld.Parent = v.Handle
-	HairWeld.Part0 = character.Head
-	HairWeld.Part1 = v.Handle
-	HairWeld.C0 = PatchC0
-end
-end
-
-
-
-
-
------------------------
-local crouching = false
-local Helpless = false
-local Ability1 = AbilityContainer.Slash
-Ability1.Parent = AbilityContainer
-Ability1.Name = "Pierce"
-Ability1.AbilityName.Text = "Pierce"
-Ability1.KeybindName.Text = "Q"
-Ability1.Image = ability1icon
-Ability1.Clipping.Top.Image = ability1icon
-local Ability2 = AbilityContainer.FriedChicken
-Ability2.Parent = AbilityContainer
-Ability2.AbilityName.Text = "Coagulate"
-Ability2.KeybindName.Text = "E"
-Ability2.Image = ability2icon
-Ability2.Clipping.Top.Image = ability2icon
-local Ability3 = AbilityTemplate:Clone()
-Ability3.Name = "Feed"
-Ability3.Parent = AbilityContainer
-Ability3.AbilityName.Text = "Feed"
-Ability3.KeybindName.Text = "R"
-Ability3.Image = ability3icon
-Ability3.Clipping.Top.Image = ability3icon
-Ability3.LayoutOrder = 3
-local RunningToggle = character.SpeedMultipliers.Sprinting
-local FOVToggle = character.FOVMultipliers.Sprinting
 -----Weapon
    local LanceBack = Instance.new("Accessory")
     LanceBack.Name = "LanceBack"
@@ -440,6 +333,386 @@ local FOVToggle = character.FOVMultipliers.Sprinting
     weld1.Parent = handle1
 
     LanceFront.Parent = game.Players.LocalPlayer.character
+--CLOTHING
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = character
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=13132949672"
+local Pants = Instance.new("Pants")
+Pants.Parent = character
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=13132951176"
+local Hair1 = game:GetObjects(15347329623)
+local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Hair1) do
+	v.Parent = character
+	v.Name = "TerioHair1"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair1C0
+end
+local Hair2 = game:GetObjects(17612852370)
+local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Hair2) do
+	v.Parent = character
+	v.Name = "TerioHair2"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair2C0
+end
+local FaceExpression = Instance.new("Decal")
+FaceExpression.Parent = character.Head
+FaceExpression.Texture = "rbxassetid://133089396665213"
+FaceExpression.Face = "Front"
+task.spawn(function()
+if character:FindFirstChild("Chicken") then
+character.Chicken:Destroy()
+character.Sword:Destroy()
+end
+end)
+----------SKIN HANDLER (YOURSELF)
+if player.PlayerData.Equipped.Skins.Shedletsky.Value == "ModernShedletsky" then
+------------MANCHEGAN TERIO
+--------
+for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomancheganicon
+	end
+end
+if character:FindFirstChild("TerioHair1") then
+character["TerioHair1"]:Destroy()
+character["TerioHair2"]:Destroy()
+end
+normalexpression = "rbxassetid://405705854"
+swingexpression = "rbxassetid://405705854"
+sadexpression = "rbxassetid://405705854"
+for i,v in pairs(character:GetChildren()) do
+	if v.Name == "Clothing" then
+		v:Destroy()
+	end
+end
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = character
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=77697773617559"
+local Pants = Instance.new("Pants")
+Pants.Parent = character
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=134919602560582"
+local Hair1 = game:GetObjects(18395424448)
+local Hair1C0 = CFrame.new(0, -0.699999988, 0, 0.0995037258, 0, 0.995037138, 0, 1, 0, 0.995037258, 0, -0.099503696)
+for i,v in pairs(Hair1) do
+v.Name = "Accessory (defaultAccessory)"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair1C0
+end
+local Hair2 = game:GetObjects(114070595923909)
+local Hair2C0 = CFrame.new(0.0500000007, 0, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Hair2) do
+v.Name = "Accessory (Lannscyfe_Hair [Teal])"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = Hair2C0
+end
+local Patch = game:GetObjects(12353001889)
+local PatchC0 = CFrame.new(0.200000003, 0.25, -1.40000003e-08, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(Patch) do
+v.Name = "Terio_EyePatch"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = PatchC0
+end
+--------------------------------
+elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone25Shedletsky" then
+---------------------------------------------MILESTONE 1 TERIO
+--------------------------------
+for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomilestone1icon
+	end
+end
+	local Collar = game:GetObjects(12423709115)
+local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
+for i,v in pairs(Collar) do
+	v.Parent = character
+	v.Name = "TerioCollar"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = CollarC0
+end
+local Scales = game:GetObjects(12768188594)
+local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scales) do
+	v.Parent = character
+	v.Name = "TerioScales"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScalesC0
+end
+----------------------------
+elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone50Shedletsky" then
+	-----TERIOMILESTONE2
+	-----------------------------
+	for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomilestone2icon
+	end
+end
+	local Collar = game:GetObjects(12423709115)
+local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
+for i,v in pairs(Collar) do
+	v.Parent = character
+	v.Name = "TerioCollar"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = CollarC0
+end
+local Scales = game:GetObjects(12768188594)
+local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scales) do
+	v.Parent = character
+	v.Name = "TerioScales"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScalesC0
+end
+local RoseHead = game:GetObjects(74428462972927)
+local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(RoseHead) do
+	v.Parent = character
+	v.Name = "TerioRoseHead"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = RoseHeadC0
+end
+-----------------------------------
+elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone75Shedletsky" then
+	-----TERIO MILESTONE 3
+	-----------------------------
+	for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomilestone3icon
+	end
+end
+	local Collar = game:GetObjects(12423709115)
+local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
+for i,v in pairs(Collar) do
+	v.Parent = character
+	v.Name = "TerioCollar"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = CollarC0
+end
+local Scales = game:GetObjects(12768188594)
+local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scales) do
+	v.Parent = character
+	v.Name = "TerioScales"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScalesC0
+end
+local RoseHead = game:GetObjects(74428462972927)
+local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(RoseHead) do
+	v.Parent = character
+	v.Name = "TerioRoseHead"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = RoseHeadC0
+end
+local BowWhite = game:GetObjects(3875347091)
+local BowWhiteC0 = CFrame.new(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(BowWhite) do
+	v.Parent = character
+	v.Name = "TerioBowWhite"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = BowWhiteC0
+end
+local TerioCoat = game:GetObjects(124273274714758)
+local TerioCoatC0 = CFrame.new(0, -0.75, 0.174999997, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(TerioCoat) do
+	v.Parent = character
+	v.Name = "TerioCoat"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Torso
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = TerioCoatC0
+end
+--------------------------------------
+elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone100Shedletsky" then
+-------TERIO MILESTONE 4---------------
+for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = teriomilestone4icon
+	end
+end
+		local Collar = game:GetObjects(12423709115)
+local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
+for i,v in pairs(Collar) do
+	v.Parent = character
+	v.Name = "TerioCollar"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = CollarC0
+end
+local Scales = game:GetObjects(12768188594)
+local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scales) do
+	v.Parent = character
+	v.Name = "TerioScales"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScalesC0
+end
+local RoseHead = game:GetObjects(74428462972927)
+local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(RoseHead) do
+	v.Parent = character
+	v.Name = "TerioRoseHead"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = RoseHeadC0
+end
+local BowWhite = game:GetObjects(3875347091)
+local BowWhiteC0 = CFrame.new(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(BowWhite) do
+	v.Parent = character
+	v.Name = "TerioBowWhite"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = BowWhiteC0
+end
+
+local TerioCoat = game:GetObjects(124273274714758)
+local TerioCoatC0 = CFrame.new(0, -0.75, 0.174999997, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(TerioCoat) do
+	v.Parent = character
+	v.Name = "TerioCoat"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Torso
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = TerioCoatC0
+end
+local Scarf = game:GetObjects(13551519963)
+ScarfC0 = CFrame.new(0, -1.60000002, 1.30000007, 1, 0, 0, 0, 1, 0, 0, 0, -1)
+for i,v in pairs(Scarf) do
+v.Name = "TerioScarf"
+	v.Parent = character
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character["Head"]
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = ScarfC0
+end
+for i,v in pairs(character:GetChildren()) do
+	if v.Name == "Clothing" then
+		v:Destroy()
+	end
+end
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = character
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=80628548279541"
+local Pants = Instance.new("Pants")
+Pants.Parent = character
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=123452391937439"
+character.LanceBack.Handle.Mesh.TextureId = "http://www.roblox.com/asset/?id=113308087236716"
+character.LanceFront.Handle.Mesh.TextureId = "http://www.roblox.com/asset/?id=113308087236716"
+local IdleAnim = Instance.new("Animation")
+IdleAnim.AnimationId = "rbxassetid://138598353840498"
+local WalkAnim = Instance.new("Animation")
+WalkAnim.AnimationId = "rbxassetid://136463880292090"
+local IdleTrack = character.Humanoid:LoadAnimation(IdleAnim)
+IdleTrack.Looped = true
+IdleTrack:Play()
+local WalkTrack = character.Humanoid:LoadAnimation(WalkAnim)
+WalkTrack.Looped = true
+character.Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+if character.Humanoid.MoveDirection == Vector3.new(0, 0, 0) then
+	IdleTrack:Play()
+	WalkTrack:Stop()
+else
+	IdleTrack:Stop()
+end
+end)
+------------------------
+end
+
+
+
+
+
+-----------------------
+local crouching = false
+local Helpless = false
+local Ability1 = AbilityContainer.Slash
+Ability1.Parent = AbilityContainer
+Ability1.Name = "Pierce"
+Ability1.AbilityName.Text = "Pierce"
+Ability1.KeybindName.Text = "Q"
+Ability1.Image = ability1icon
+Ability1.Clipping.Top.Image = ability1icon
+local Ability2 = AbilityContainer.FriedChicken
+Ability2.Parent = AbilityContainer
+Ability2.AbilityName.Text = "Coagulate"
+Ability2.KeybindName.Text = "E"
+Ability2.Image = ability2icon
+Ability2.Clipping.Top.Image = ability2icon
+local Ability3 = AbilityTemplate:Clone()
+Ability3.Name = "Feed"
+Ability3.Parent = AbilityContainer
+Ability3.AbilityName.Text = "Feed"
+Ability3.KeybindName.Text = "R"
+Ability3.Image = ability3icon
+Ability3.Clipping.Top.Image = ability3icon
+Ability3.LayoutOrder = 3
+local RunningToggle = character.SpeedMultipliers.Sprinting
+local FOVToggle = character.FOVMultipliers.Sprinting
+
 local stabSFX = Instance.new("Sound")
 stabSFX.SoundId = "rbxassetid://99820161736138" 
 stabSFX.Volume = 1.45  
@@ -635,7 +908,7 @@ end
 
 -- Ability Activation using the E key
 UserInputService.InputBegan:Connect(function(input, gp)
-if not TagCheck then return end
+if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 	if gp then return end
     if CoagulateDebounce then return end
     if Helpless then return end
@@ -686,7 +959,7 @@ end)
 
 -- Slash with behind check (exits ability if conditions are not met)
 UserInputService.InputBegan:Connect(function(input, gp)
-if not TagCheck then return end
+if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 	if gp then return end
     if Helpless then return end
     if PierceDebounce then return end
@@ -807,6 +1080,7 @@ end
 end)
 ----OTHER PLAYERS (MULTIPLAYER)
 ----------------------------
+local player = game.Players.LocalPlayer
 local syncedTable = {}
 for i,plr in pairs(game.Players:GetPlayers()) do
    plr.Chatted:Connect(function(msg)
