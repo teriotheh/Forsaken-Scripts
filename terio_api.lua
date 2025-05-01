@@ -32,7 +32,7 @@ if split_result[1] == ":speak" then
     local pler = split_result[2]
     table.remove(split_result,1)
     table.remove(split_result,2)
-    if pler.Name == game.Players.LocalPlayer.Name then
+    if pler == game.Players.LocalPlayer.Name then
 		Chat(string.concat(split_result, " "))
 	end
 end
