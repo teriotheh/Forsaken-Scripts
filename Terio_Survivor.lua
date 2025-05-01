@@ -81,15 +81,7 @@ if v:IsA("Frame") then
 		v.Container.Title.Text = "Manchegan"
 		v.Container.CharacterRender.Image = teriomancheganicon
 
-		elseif v.Name == "Milestone25Shedletsky" then
-		v.Container.CharacterRender.Image = teriomilestone1icon
-		elseif v.Name == "Milestone50Shedletsky" then
-		v.Container.CharacterRender.Image = teriomilestone2icon
-		elseif v.Name == "Milestone75Shedletsky" then
-		v.Container.CharacterRender.Image = teriomilestone3icon
-	        elseif v.Name == "Milestone100Shedletsky" then
-		v.Container.CharacterRender.Image = teriomilestone4icon
-    end
+	end
 end
 end)
 player.PlayerGui.MainUI.DescendantAdded:Connect(function(v)
@@ -148,6 +140,8 @@ while task.wait() do
 		if v:IsA("TextLabel") and string.find(v.Text, "A lonely") then
 				v.Text = "A lonely bloodfiend who only cares about himself and the blood he gains. Too far gone into the starvation to hold himself back. Benefits off of other people's deaths by absorbing their blood."
 				v.MaxVisibleGraphemes = 500
+		elseif v:IsA("TextLabel") and string.find(v.Text, "Shedletsky Skins") then
+			v.Text = "Terio Skins"
 		end
 	end
 end
