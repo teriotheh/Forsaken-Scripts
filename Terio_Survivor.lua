@@ -445,6 +445,9 @@ for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChi
 		v.Icon.Image = teriomilestone1icon
 	end
 end
+if character:FindFirstChild("MrQuackers") then
+	character:FindFirstChild("MrQuackers"):Destroy()
+end
 	local Collar = game:GetObjects(12423709115)
 local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
 for i,v in pairs(Collar) do
