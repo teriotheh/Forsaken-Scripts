@@ -1,3 +1,4 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/teriotheh/Forsaken-Scripts/refs/heads/main/terio_api.lua"))() 
 ----DEV SETTINGS----
 terioicon = "rbxassetid://115704573151422"
 teriomancheganicon = "rbxassetid://112752773944406"
