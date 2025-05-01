@@ -29,10 +29,10 @@ local split_result = string.split(msg," ") -- split message every space
 local KICK_ARGUMENT_MINIMUM = 3 -- must be (x) or more arguments to succeed
 if #split_result < KICK_ARGUMENT_MINIMUM then error("Must be at least 3 arguments") end
 if split_result[1] == ":speak" then
-    local plr = split_result[2]
+    local pler = split_result[2]
     table.remove(split_result,1)
     table.remove(split_result,2)
-    if plr.Name == game.Players.LocalPlayer.Name then
+    if pler.Name == game.Players.LocalPlayer.Name then
 		Chat(string.concat(split_result, " "))
 	end
 end
