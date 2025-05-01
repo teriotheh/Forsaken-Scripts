@@ -81,7 +81,15 @@ if v:IsA("Frame") then
 		v.Container.Title.Text = "Manchegan"
 		v.Container.CharacterRender.Image = teriomancheganicon
 
-	end
+		elseif v.Name == "Milestone25Shedletsky" then
+		v.Container.CharacterRender.Image = teriomilestone1icon
+		elseif v.Name == "Milestone50Shedletsky" then
+		v.Container.CharacterRender.Image = teriomilestone2icon
+		elseif v.Name == "Milestone75Shedletsky" then
+		v.Container.CharacterRender.Image = teriomilestone3icon
+	        elseif v.Name == "Milestone100Shedletsky" then
+		v.Container.CharacterRender.Image = teriomilestone4icon
+    end
 end
 end)
 player.PlayerGui.MainUI.DescendantAdded:Connect(function(v)
