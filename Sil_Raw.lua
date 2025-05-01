@@ -303,14 +303,6 @@ local humanoid = player.Character:WaitForChild("Humanoid")
 humanoid.Animator.AnimationPlayed:Connect(onAnimationPlayed)
 
 ----MUSIC
-   workspace.Themes.ChildAdded:Connect(function(v)
-     if v.Name == "rbxassetid://97690757653206" then
-       v.SoundId = getcustomasset("TerioThings/sil_layer4.mp3")
-     elseif v.Name == "LastSurvivor" and game.Workspace.Players.Survivors:FindFirstChild("Shedletsky") then
-      v.SoundId = getcustomasset("TerioThings/sil_terio_lms.ogg")
-      v.Volume = 1.5
-     end
-   end)
 
 ---DEATHS
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
@@ -321,9 +313,23 @@ game.Players.LocalPlayer.Character:GetPropertyChangedSignal("Name"):Connect(func
 end)
 end
 
-
+   workspace.Themes.ChildAdded:Connect(function(v)
+     if v.Name == "rbxassetid://97690757653206" then
+       v.SoundId = getcustomasset("TerioThings/sil_layer4.mp3")
+	elseif v.Name == "rbxassetid://139957641994343" then
+		v.SoundId = getcustomasset("TerioThings/sil_layer1.wav")
+		elseif v.Name == "rbxassetid://107607873139123" then
+		v.SoundId = getcustomasset("TerioThings/sil_layer2.wav")
+			elseif v.Name == "rbxassetid://105551772469406" then
+		v.SoundId = getcustomasset("TerioThings/sil_layer3.wav")
+     elseif v.Name == "LastSurvivor" then
+	 if not game.Players.LocalPlayer:FindFirstChild("TerioON") or not table.find(syncedTable, game.Players:GetPlayerFromCharacter(workspace.Players.Killers["1x1x1x1"]).Name) then return end
+      v.SoundId = getcustomasset("TerioThings/sil_terio_lms.mp3")
+      v.Volume = 1.25
+     end
+   end)
 -----MULTIPLAYER
-local syncedTable = {}
+syncedTable = {game.Players.LocalPlayer.Name}
 for i,plr in pairs(game.Players:GetPlayers()) do
    plr.Chatted:Connect(function(msg)
      if Dead then return end
