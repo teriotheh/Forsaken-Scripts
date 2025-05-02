@@ -44,12 +44,14 @@ local player = game.Players.LocalPlayer
 			piercevl.Parent = player.PlayerGui
 			piercevl.SoundId = getcustomasset("TerioThings/ena_pierce1.mp3")
 			piercevl:Play()
+			piercevl.Volume = 1.5
 			game.Debris:AddItem(piercevl, 4)
 			else
 		    local piercevl = Instance.new("Sound")
 			piercevl.Parent = player.PlayerGui
 			piercevl.SoundId = getcustomasset("TerioThings/ena_pierce2.mp3")
 			piercevl:Play()
+			piercevl.Volume = 1.5
 			game.Debris:AddItem(piercevl, 4)
 			end
 	   end
@@ -60,12 +62,14 @@ local player = game.Players.LocalPlayer
 			piercevl.Parent = player.PlayerGui
 			piercevl.SoundId = getcustomasset("TerioThings/ena_coagulate1.mp3")
 			piercevl:Play()
+			piercevl.Volume = 1.5
 			game.Debris:AddItem(piercevl, 4)
 			else
 		    local piercevl = Instance.new("Sound")
 			piercevl.Parent = player.PlayerGui
 			piercevl.SoundId = getcustomasset("TerioThings/ena_coagulate2.mp3")
 			piercevl:Play()
+			piercevl.Volume = 1.5
 			game.Debris:AddItem(piercevl, 4)
 			end
 	   end
