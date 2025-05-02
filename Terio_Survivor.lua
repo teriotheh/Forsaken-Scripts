@@ -33,7 +33,45 @@ TerioUsed.Name = "TerioUsed"
      end
    end)
 
-----------
+-------------
+-----VOICELINE SYSTEM
+function voicelines(v)
+local player = game.Players.LocalPlayer
+   if v == 0 then
+	   if player.PlayerData.Equipped.Skins.Shedletsky.Value == "VampireShedletsky" then
+	        if math.random(1,2) == 1 then
+            local piercevl = Instance.new("Sound")
+			piercevl.Parent = player.PlayerGui
+			piercevl.SoundId = getcustomasset("TerioThings/ena_pierce1.mp3")
+			piercevl:Play()
+			game.Debris:AddItem(piercevl, 4)
+			else
+		    local piercevl = Instance.new("Sound")
+			piercevl.Parent = player.PlayerGui
+			piercevl.SoundId = getcustomasset("TerioThings/ena_pierce2.mp3")
+			piercevl:Play()
+			game.Debris:AddItem(piercevl, 4)
+			end
+	   end
+   elseif v == 1 then
+	   	if player.PlayerData.Equipped.Skins.Shedletsky.Value == "VampireShedletsky" then
+	        if math.random(1,2) == 1 then
+            local piercevl = Instance.new("Sound")
+			piercevl.Parent = player.PlayerGui
+			piercevl.SoundId = getcustomasset("TerioThings/ena_coagulate1.mp3")
+			piercevl:Play()
+			game.Debris:AddItem(piercevl, 4)
+			else
+		    local piercevl = Instance.new("Sound")
+			piercevl.Parent = player.PlayerGui
+			piercevl.SoundId = getcustomasset("TerioThings/ena_coagulate2.mp3")
+			piercevl:Play()
+			game.Debris:AddItem(piercevl, 4)
+			end
+	   end
+   end
+end
+-----------------------------------------------
 task.spawn(function()
 local player = game.Players.LocalPlayer
 task.spawn(function()
@@ -193,6 +231,14 @@ local ContextActionService = game:GetService("ContextActionService")
 local character = player.character or player.characterAdded:Wait()
 local StatusTemplate = game.ReplicatedStorage.Modules.Statuses.StatusDisplay
 local Dead = false
+---------------------------------SFX
+piercesfx = "TerioThings/lance_swing.mp3"
+coagulatesfx = "TerioThings/coagulate.mp3"
+
+
+
+
+----------------------------------------
 print("not losag")
 if character.Name == "Shedletsky" then
 if character:FindFirstChild("CurrentlyTerio") then return end
@@ -475,6 +521,8 @@ for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChi
 		v.Icon.Image = terioenaicon
 	end
 end
+piercesfx = "TerioThings/lance_swing_ena.mp3"
+coagulatesfx = "TerioThings/coagulate.mp3"
 character.TerioHair1.Handle.SpecialMesh.TextureId = ""
 character.TerioHair1.Handle.Color = Color3.fromRGB(0, 0, 0)
 character.TerioHair2.Handle.SpecialMesh.TextureId = ""
@@ -1001,12 +1049,13 @@ if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 		task.wait(70)
 		CoagulateDebounce = false
 	end)
+	voicelines(1)
       freezePlayer()
 	  task.wait(2)
 	  FaceExpression.Texture = "rbxassetid://127552301758353"
 	  	  local coagulate = Instance.new("Sound")
 	  coagulate.Parent = player.PlayerGui
-	  coagulate.SoundId = getcustomasset("TerioThings/coagulate.mp3")
+	  coagulate.SoundId = getcustomasset(coagulatesfx)
 	  coagulate.PlaybackSpeed = 1.5
 	  coagulate:Play()
 	  coagulate.Volume = 1.5
@@ -1048,9 +1097,10 @@ if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
     if character.Humanoid.Health <= 0 then return end
 	if input.KeyCode == Enum.KeyCode.Q then
         task.spawn(function()
+		voicelines(0)
 	  local coagulate = Instance.new("Sound")
 	  coagulate.Parent = player.PlayerGui
-	  coagulate.SoundId = getcustomasset("TerioThings/lance_swing.mp3")
+	  coagulate.SoundId = getcustomasset(piercesfx)
 	  coagulate.PlaybackSpeed = 1.5
 	  coagulate:Play()
 	  coagulate.Volume = 1.5
@@ -1081,7 +1131,7 @@ if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
             task.wait(0.5)
 			 local coagulate = Instance.new("Sound")
 	  coagulate.Parent = player.PlayerGui
-	  coagulate.SoundId = getcustomasset("TerioThings/lance_swing.mp3")
+	  coagulate.SoundId = getcustomasset(piercesfx)
 	  coagulate.PlaybackSpeed = 2
 	  coagulate:Play()
 	  coagulate.Volume = 1.5
