@@ -487,7 +487,13 @@ elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone50Shedlets
 		v.SurvivorName.Text = "Terio"
 		v.Icon.Image = teriomilestone2icon
 	end
-end
+    end
+	if character.Head:FindFirstChild("PirateHat") then
+	character.Head:FindFirstChild("PirateHat"):Destroy()
+	character["T-Shirt"]:Destroy()
+	character["Left Arm"].MrQuackers:Destroy()
+	character.Torso.Crown:Destroy()
+    end
 	local Collar = game:GetObjects(12423709115)
 local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0, 1, 0, 0.999996066, 0, 0.00277776853)
 for i,v in pairs(Collar) do
