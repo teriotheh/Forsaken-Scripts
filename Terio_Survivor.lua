@@ -1,6 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/teriotheh/Forsaken-Scripts/refs/heads/main/terio_api.lua"))() 
 ----DEV SETTINGS----
 terioicon = "rbxassetid://115704573151422"
+terioenaicon = "rbxassetid://84526492688138"
 teriomancheganicon = "rbxassetid://112752773944406"
 teriomilestone1icon = "rbxassetid://104471834912500"
 teriomilestone2icon = "rbxassetid://123811292607283"
@@ -23,6 +24,16 @@ local TerioUsed = Instance.new("Folder")
 TerioUsed.Parent = game.Players.LocalPlayer
 TerioUsed.Name = "TerioUsed"
 ---------------------------------------------------------TERIO UI
+-----------------------CUSTOM LMS FOR SKINS
+   workspace.Themes.ChildAdded:Connect(function(v)
+   local character = game.Players.LocalPlayer.Character
+     if v.Name == "LastSurvivor" and character.Parent == workspace.Players.Survivors and character.Name == "Shedletsky" and character:FindFirstChild("TerioYellowFace") then
+      v.SoundId = getcustomasset("TerioThings/lmsan_e.mp3")
+      v.Volume = 1.8
+     end
+   end)
+
+----------
 task.spawn(function()
 local player = game.Players.LocalPlayer
 task.spawn(function()
@@ -34,6 +45,11 @@ if v:IsA("Frame") then
 		v.Main.Titles.Secondary.Visible = true
 		v.Main.Titles.Secondary.Text = '"I am Terio... of La Manchaland"'
 		v.Main.Card.CharacterRender.Image = teriomancheganicon
+    elseif v.Main.Titles.Primary.Text == "Received 'Vampire' Skin" then
+		v.Main.Titles.Primary.Text = "Received 'ENA' Skin"
+		v.Main.Titles.Secondary.Visible = true
+		v.Main.Titles.Secondary.Text = '"Im allergic to people...!"'
+		v.Main.Card.CharacterRender.Image = terioenaicon
 	elseif v.Main.Titles.Primary.Text == "Received 'Milestone I' Skin" then
 	v.Main.Card.CharacterRender.Image = teriomilestone1icon
 	v.Main.Titles.Secondary.Visible = true
@@ -61,11 +77,13 @@ if not player:FindFirstChild("TerioON") then return end
 if child.Name ~= "ConfirmPurchase" then return end
 if player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text == 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">Modern</font></b> for <b><font color="rgb(255,255,255)">200$</font></b>?' then
 	player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text = 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">Manchegan</font></b> for <b><font color="rgb(255,255,255)">200$</font></b>?'
+elseif player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text == 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">Vampire</font></b> for <b><font color="rgb(255,255,255)">600$</font></b>?' then
+	player.PlayerGui.MainUI.ShopScreen.ConfirmPurchase.Title.Text = 'Are you sure you would like to purchase <b><font color="rgb(255,255,255)">ENA</font></b> for <b><font color="rgb(255,255,255)">600$</font></b>?'
 end
 end)
 player.PlayerGui.MainUI.ShopScreen.ShopRoot.SkinsContainer.Contents.ChildAdded:Connect(function(v)
 if v:IsA("Frame") then
-	if string.find(v.Name, "Shedletsky") and v.Name ~= "ModernShedletsky" then
+	if string.find(v.Name, "Shedletsky") and v.Name ~= "ModernShedletsky" and v.Name ~= "VampireShedletsky" then
 		v:Destroy()
 	elseif v.Name == "ModernShedletsky" then
 		v.Name = "MancheganTerio"
@@ -73,6 +91,11 @@ if v:IsA("Frame") then
 		v.Container.Price.Text = "200$"
 		v.Container.CharacterRender.Image = teriomancheganicon
 
+	elseif v.Name == "VampireShedletsky" then
+		v.Name = "ENATerio"
+		v.Container.Title.Text = "ENA"
+		v.Container.Price.Text = "600$"
+		v.Container.CharacterRender.Image = terioenaicon
 	end
 end
 end)
@@ -81,6 +104,9 @@ if v:IsA("Frame") then
     if v.Name == "ModernShedletsky" then
 		v.Container.Title.Text = "Manchegan"
 		v.Container.CharacterRender.Image = teriomancheganicon
+	elseif v.Name == "VampireShedletsky" then
+		v.Container.Title.Text = "ENA"
+		v.Container.CharacterRender.Image = terioenaicon
     elseif v.Name == "Milestone25Shedletsky" then
 		v.Container.CharacterRender.Image = teriomilestone1icon
 	elseif v.Name == "Milestone50Shedletsky" then
@@ -280,14 +306,10 @@ if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
 	end
 end
 task.spawn(function()
-while task.wait() do
-if not game.Players.LocalPlayer.Character:FindFirstChild(tag) then return end
-if Dead then return end
-for i,v in pairs(character:GetDescendants()) do
+for i,v in pairs(character:GetChildren()) do
 	if v:IsA("BasePart") then
 		v.Color = Color3.fromRGB(255, 255, 255)
 	end
-end
 end
 end)
 -----Weapon
@@ -444,6 +466,46 @@ v.Name = "Terio_EyePatch"
 	HairWeld.C0 = PatchC0
 end
 --------------------------------
+elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "VampireShedletsky" then
+------------ENA TERIO
+--------
+for i,v in pairs(player.PlayerGui.TemporaryUI.PlayerInfo.CurrentSurvivors:GetChildren()) do
+	if v:IsA("Frame") and string.find(v.Username.Text, player.Name) then
+		v.SurvivorName.Text = "Terio"
+		v.Icon.Image = terioenaicon
+	end
+end
+character.TerioHair1.Handle.SpecialMesh.TextureId = ""
+character.TerioHair1.Handle.Color = Color3.fromRGB(0, 0, 0)
+character.TerioHair2.Handle.SpecialMesh.TextureId = ""
+character.TerioHair2.Handle.Color = Color3.fromRGB(0, 0, 0)
+character.LanceBack.Handle.Mesh.TextureId = ""
+character.LanceBack.Handle.Color = Color3.fromRGB(195, 195, 195)
+character.LanceFront.Handle.Mesh.TextureId = ""
+character.LanceFront.Handle.Color = Color3.fromRGB(195, 195, 195)
+character.Head.Color = Color3.fromRGB(61, 125, 255)
+local YellowFace = game:GetObjects(16829282896)
+local YellowFaceC0 = CFrame.new(-0.300000012, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+for i,v in pairs(YellowFace) do
+	v.Parent = character
+	v.Name = "TerioYellowFace"
+	local HairWeld = Instance.new("Weld")
+	HairWeld.Parent = v.Handle
+	HairWeld.Part0 = character.Head
+	HairWeld.Part1 = v.Handle
+	HairWeld.C0 = YellowFaceC0
+end
+for i,v in pairs(character:GetChildren()) do
+	if v.Name == "Clothing" then
+		v:Destroy()
+	end
+end
+local Shirt = Instance.new("Shirt")
+Shirt.Parent = character
+Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=6582412918"
+local Pants = Instance.new("Pants")
+Pants.Parent = character
+Pants.PantsTemplate = "http://www.roblox.com/asset/?id=6582455022"
 elseif player.PlayerData.Equipped.Skins.Shedletsky.Value == "Milestone25Shedletsky" then
 ---------------------------------------------MILESTONE 1 TERIO
 --------------------------------
