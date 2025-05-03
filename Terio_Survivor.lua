@@ -427,6 +427,7 @@ local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair1) do
 	v.Parent = character
 	v.Name = "TerioHair1"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -438,6 +439,7 @@ local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair2) do
 	v.Parent = character
 	v.Name = "TerioHair2"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -487,6 +489,7 @@ local Hair1C0 = CFrame.new(0, -0.699999988, 0, 0.0995037258, 0, 0.995037138, 0, 
 for i,v in pairs(Hair1) do
 v.Name = "Accessory (defaultAccessory)"
 	v.Parent = character
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -496,6 +499,7 @@ end
 local Hair2 = game:GetObjects(114070595923909)
 local Hair2C0 = CFrame.new(0.0500000007, 0, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair2) do
+v.Handle.CanCollide = false
 v.Name = "Accessory (Lannscyfe_Hair [Teal])"
 	v.Parent = character
 	local HairWeld = Instance.new("Weld")
@@ -509,6 +513,7 @@ local PatchC0 = CFrame.new(0.200000003, 0.25, -1.40000003e-08, 1, 0, 0, 0, 1, 0,
 for i,v in pairs(Patch) do
 v.Name = "Terio_EyePatch"
 	v.Parent = character
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -541,6 +546,7 @@ local YellowFaceC0 = CFrame.new(-0.300000012, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(YellowFace) do
 	v.Parent = character
 	v.Name = "TerioYellowFace"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -575,6 +581,7 @@ local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0
 for i,v in pairs(Collar) do
 	v.Parent = character
 	v.Name = "TerioCollar"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -586,6 +593,7 @@ local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
 for i,v in pairs(Scales) do
 	v.Parent = character
 	v.Name = "TerioScales"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -613,6 +621,7 @@ local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0
 for i,v in pairs(Collar) do
 	v.Parent = character
 	v.Name = "TerioCollar"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -624,6 +633,7 @@ local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
 for i,v in pairs(Scales) do
 	v.Parent = character
 	v.Name = "TerioScales"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -635,6 +645,7 @@ local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(RoseHead) do
 	v.Parent = character
 	v.Name = "TerioRoseHead"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -656,6 +667,7 @@ local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0
 for i,v in pairs(Collar) do
 	v.Parent = character
 	v.Name = "TerioCollar"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -667,6 +679,7 @@ local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
 for i,v in pairs(Scales) do
 	v.Parent = character
 	v.Name = "TerioScales"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -678,6 +691,7 @@ local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(RoseHead) do
 	v.Parent = character
 	v.Name = "TerioRoseHead"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -689,6 +703,7 @@ local BowWhiteC0 = CFrame.new(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(BowWhite) do
 	v.Parent = character
 	v.Name = "TerioBowWhite"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -700,6 +715,7 @@ local TerioCoatC0 = CFrame.new(0, -0.75, 0.174999997, 1, 0, 0, 0, 1, 0, 0, 0, -1
 for i,v in pairs(TerioCoat) do
 	v.Parent = character
 	v.Name = "TerioCoat"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Torso
@@ -720,6 +736,7 @@ local CollarC0 = CFrame.new(0, -0.600000024, 0, 0.0027777669, 0, -0.999996185, 0
 for i,v in pairs(Collar) do
 	v.Parent = character
 	v.Name = "TerioCollar"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -731,6 +748,7 @@ local ScalesC0 = CFrame.new(0, -0.25, -0.407499999, 1, 0, 0, 0, 1, 0, 0, 0, -1)
 for i,v in pairs(Scales) do
 	v.Parent = character
 	v.Name = "TerioScales"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -742,6 +760,7 @@ local RoseHeadC0 = CFrame.new(0.700000048, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(RoseHead) do
 	v.Parent = character
 	v.Name = "TerioRoseHead"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -753,6 +772,7 @@ local BowWhiteC0 = CFrame.new(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(BowWhite) do
 	v.Parent = character
 	v.Name = "TerioBowWhite"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Head
@@ -765,6 +785,7 @@ local TerioCoatC0 = CFrame.new(0, -0.75, 0.174999997, 1, 0, 0, 0, 1, 0, 0, 0, -1
 for i,v in pairs(TerioCoat) do
 	v.Parent = character
 	v.Name = "TerioCoat"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character.Torso
@@ -776,6 +797,7 @@ ScarfC0 = CFrame.new(0, -1.60000002, 1.30000007, 1, 0, 0, 0, 1, 0, 0, 0, -1)
 for i,v in pairs(Scarf) do
 v.Name = "TerioScarf"
 	v.Parent = character
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = character["Head"]
@@ -1257,6 +1279,7 @@ local Hair1C0 = CFrame.new(0.05, 0.15, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair1) do
 	v.Parent = targetChar
 	v.Name = "TerioHair1"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = targetChar.Head
@@ -1268,6 +1291,7 @@ local Hair2C0 = CFrame.new(0, -0.699999988, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 for i,v in pairs(Hair2) do
 	v.Parent = targetChar
 	v.Name = "TerioHair2"
+	v.Handle.CanCollide = false
 	local HairWeld = Instance.new("Weld")
 	HairWeld.Parent = v.Handle
 	HairWeld.Part0 = targetChar.Head
