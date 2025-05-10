@@ -53,7 +53,7 @@ function addStatusEffect(status, power, timer)
     Status:Destroy()
 end
 
-function statusModule.giveSpeed(timey, power)
+function statusModule.giveSpeed(_, timey, power)
 task.spawn(function()
 task.spawn(function()
 addStatusEffect("Speed", intToRoman(power), timey)
